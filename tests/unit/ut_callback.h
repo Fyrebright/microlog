@@ -8,6 +8,13 @@ extern "C" {
 
 #define UT_LOG_BUFFER_SIZE 256
 
+// Options for creating c_str
+typedef struct {
+  bool full_time;
+  bool color;
+  bool new_line;
+} c_str_opts;
+
 void ut_callback(ulog_Event *ev, void *arg);
 
 int ut_callback_get_message_count();

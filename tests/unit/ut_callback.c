@@ -16,8 +16,16 @@ void ut_callback(ulog_Event *ev, void *arg) {
 
     // Clear the last message buffer before writing a new message
     memset(last_message_buffer, 0, sizeof(last_message_buffer));
-    
-    ulog_event_to_cstr(ev, last_message_buffer, sizeof(last_message_buffer));
+
+    if (arg != NULL) {
+        c_str_opts *user_opts = (c_str_opts *)arg;
+        ulog_event_to_cstr_opts(
+            ev, last_message_buffer, sizeof(last_message_buffer),
+            user_opts->full_time, user_opts->color, user_opts->new_line);
+    } else {
+        ulog_event_to_cstr(ev, last_message_buffer,
+                           sizeof(last_message_buffer));
+    }
 
     processed_message_count++;
 }

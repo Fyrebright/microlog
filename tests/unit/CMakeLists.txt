@@ -70,3 +70,12 @@ target_sources(test_time PRIVATE ${ULOG_SRC}
 target_include_directories(test_time PRIVATE ${ULOG_INCLUDE_DIR})
 target_compile_definitions(test_time PRIVATE ${ULOG_CONFIG_BASE})
 add_test(NAME TimeTest COMMAND test_time)
+
+# --- Color Test ---
+add_executable(test_color)
+target_sources(test_color PRIVATE ${ULOG_SRC} 
+                                   ut_callback.c 
+                                   test_color.cpp)
+target_include_directories(test_color PRIVATE ${ULOG_INCLUDE_DIR})
+target_compile_definitions(test_color PRIVATE ${ULOG_CONFIG_BASE})
+add_test(NAME ColorTest COMMAND test_color)

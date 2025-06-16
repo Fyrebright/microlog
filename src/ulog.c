@@ -606,12 +606,18 @@ static void callback_stdout(ulog_Event *ev, void *arg) {
     print_formatted_message(&tgt, ev, false, true, true);
 }
 
-int ulog_event_to_cstr(ulog_Event *ev, char *out, size_t out_size) {
+int ulog_event_to_cstr_opts(ulog_Event *ev, char *out, size_t out_size,
+                            bool full_time, bool color, bool new_line) {
     if (!out || out_size == 0) {
         return -1;
     }
     log_target tgt = {.type = T_BUFFER, .dsc.buffer = {out, 0, out_size}};
-    print_formatted_message(&tgt, ev, false, false, false);
+    print_formatted_message(&tgt, ev, full_time, color, new_line);
+    return 0;
+}
+
+int ulog_event_to_cstr(ulog_Event *ev, char *out, size_t out_size) {
+    ulog_event_to_cstr_opts(ev, out, out_size, false, false, true);
     return 0;
 }
 

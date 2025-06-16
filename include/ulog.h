@@ -181,6 +181,18 @@ void ulog_set_quiet(bool enable);
 /// @return 0 if success, -1 if failed
 int ulog_event_to_cstr(ulog_Event *ev, char *out, size_t out_size);
 
+/// @brief Write event content to a buffer as a log message, with options for
+/// full time, color, and new line
+/// @param ev - Event
+/// @param out_buf - Output buffer
+/// @param out_buf_size - Output buffer size
+/// @param full_time - Include full time in the output
+/// @param color - Use color in the output
+/// @param new_line - Add a new line at the end of the output
+/// @return 0 if success, -1 if failed
+int ulog_event_to_cstr_opts(ulog_Event *ev, char *out, size_t out_size,
+                       bool full_time, bool color, bool new_line);
+
 /// @brief Logs the message
 /// @param level - Debug level
 /// @param file - File name
